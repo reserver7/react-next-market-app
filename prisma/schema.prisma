@@ -51,8 +51,12 @@ model User {
   image          String?
   accounts       Account[]
   sessions       Session[]
+  createdAt      DateTime  @default(now())
+  updateAt       DateTime  @updatedAt
 
-  userType UserType @default(User)
+  userType    UserType  @default(User)
+  Product     Product[]
+  favoriteIds String[]
 }
 
 model VerificationToken {
@@ -61,4 +65,20 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  imageSrc    String
+  category    String
+  userId      String
+  price       Int
+  latitude    Float
+  longitude   Float
+  createdAt   DateTime @default(now())
+  updateAt    DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

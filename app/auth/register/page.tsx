@@ -29,7 +29,7 @@ const Register = () => {
     try {
       const { data } = await axios.post("/api/register", body);
       console.log(data);
-      router.push("auth/login");
+      router.push("login");
     } catch (err) {
       console.log(err);
     } finally {
