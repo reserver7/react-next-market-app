@@ -9,9 +9,13 @@ import Heading from "../../../components/Heading";
 import ImageUpload from "../../../components/ImageUpload";
 import { categories } from "../../../components/categories/Categories";
 import CategoryInput from "@/components/categories/CategoryInput";
+import dynamic from "@/node_modules/next/dynamic";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
 const ProductUploadPage = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -34,9 +38,27 @@ const ProductUploadPage = () => {
 
   const imageSrc = watch("imageSrc");
   const category = watch("category");
+  const latitude = watch("latitude");
+  const longitude = watch("longitude");
+
+  const KakaoMap = dynamic(() => import("../../../components/KakaoMap"), {
+    ssr: false,
+  });
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
+    setIsLoading(true);
+
+    axios.post("/api/products", data)
+      .then((response) => {
+        router.push(`/products/${response.data.id}`);
+        reset();
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const setCustomValue = (id: string, value: any) => {
@@ -85,7 +107,7 @@ const ProductUploadPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 max-h-[50vh] overflow-y-auto">
             {categories.map((item) => (
-              <div key={item.label} className="col-span-1">
+              <div key={item.label} className="col-span-1 m-1">
                 <CategoryInput
                   onClick={(category) => setCustomValue("category", category)}
                   selected={category === item.path}
@@ -97,6 +119,12 @@ const ProductUploadPage = () => {
             ))}
           </div>
           <hr />
+
+          <KakaoMap
+            setCustomValue={setCustomValue}
+            latitude={latitude}
+            longitude={longitude}
+          />
 
           <Button label="상품 생성하기" />
         </form>
