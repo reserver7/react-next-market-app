@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-// import { useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { TbBeach, TbMountain, TbPool } from "react-icons/tb";
 import { GiBoatFishing, GiIsland, GiWindmill } from "react-icons/gi";
 import { FaSkiing } from "react-icons/fa";
@@ -59,8 +59,8 @@ export const categories = [
 ];
 
 const Categories = () => {
-  //   const params = useSearchParams();
-  //   const category = params?.get("category");
+  const params = useSearchParams();
+  const category = params?.get("category");
 
   return (
     <div className="flex flex-row items-center justify-between pt-4 overflow-x-auto">
@@ -70,7 +70,7 @@ const Categories = () => {
           label={item.label}
           path={item.path}
           icon={item.icon}
-          selected={category === item.label}
+          selected={category === item.path}
         />
       ))}
     </div>
