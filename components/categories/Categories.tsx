@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { TbBeach, TbMountain, TbPool } from "react-icons/tb";
-import { GiBoatFishing, GiIsland, GiWindmill } from "react-icons/gi";
-import { FaSkiing } from "react-icons/fa";
+import { IoMdDesktop } from "react-icons/io";
+import { TbMountain, TbPool } from "react-icons/tb";
+import { GiBoatFishing, GiWindmill, GiLipstick } from "react-icons/gi";
+import { FaCar } from "react-icons/fa6";
 import { MdOutlineVilla } from "react-icons/md";
 import CategoryBox from "./CategoryBox";
 
@@ -11,7 +12,7 @@ export const categories = [
   {
     label: "디지털기기",
     path: "digital",
-    icon: TbBeach,
+    icon: IoMdDesktop,
     description: "디지털기기 카테고리입니다.",
   },
   {
@@ -41,7 +42,7 @@ export const categories = [
   {
     label: "뷰티/미용",
     path: "beauty",
-    icon: GiIsland,
+    icon: GiLipstick,
     description: "뷰티/미용 카테고리입니다.",
   },
   {
@@ -53,7 +54,7 @@ export const categories = [
   {
     label: "중고차",
     path: "used-car",
-    icon: FaSkiing,
+    icon: FaCar,
     description: "중고차 카테고리입니다.",
   },
 ];

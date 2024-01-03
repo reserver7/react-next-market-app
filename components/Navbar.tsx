@@ -11,7 +11,6 @@ interface NavbarProps {
 
 const Navbar = ({ currentUser }: NavbarProps) => {
   const [menu, setMenu] = useState(false);
-  console.log(currentUser);
 
   const handleMenu = () => {
     setMenu(!menu);
