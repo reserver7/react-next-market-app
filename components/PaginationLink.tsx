@@ -34,9 +34,6 @@ const PaginationLink = ({
     skip,
   };
 
-  console.log("active", active);
-  console.log("disabled", disabled);
-
   return (
     <Link
       href={{ query: updatedQuery }}
