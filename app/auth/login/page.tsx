@@ -62,7 +62,7 @@ const LoginPage = () => {
           required
         />
 
-        <Button label="Login" />
+        <Button label="Login" isLoading={isLoading} />
         <div className="text-center">
           <p className="text-gray-400">
             Not a member?{" "}
