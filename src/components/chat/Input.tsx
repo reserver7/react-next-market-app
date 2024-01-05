@@ -122,4 +122,3 @@ const Input = ({ receiverId, currentUserId }: InputProps) => {
 };
 
 export default Input;
-export const dynamic = "auto";
