@@ -26,8 +26,14 @@ const LoginPage = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (body) => {
     setIsLoading(true);
     try {
-      const { data } = await signIn("credentials", body);
-      console.log(data);
+      const response = await signIn("credentials", body);
+      if (response && "data" in response) {
+        const { data } = response;
+        // 'data'를 적절하게 사용합니다
+        console.log(data);
+      } else {
+        // 'data'가 undefined인 경우나 'response'에 'data' 속성이 없는 경우 처리합니다
+      }
     } catch (err) {
       console.log(err);
     } finally {
