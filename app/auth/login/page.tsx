@@ -26,8 +26,8 @@ const LoginPage = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (body) => {
     setIsLoading(true);
     try {
-      const { data } = signIn("credentials", body);
-      console.log(data);
+      const { data } = await signIn("credentials", body);
+      // console.log(data);
     } catch (err) {
       console.log(err);
     } finally {
