@@ -66,6 +66,7 @@ export const authOptions: NextAuthOptions = {
         return { ...token, ...user }
     },
     async session({ session, token }) {
+        // @ts-ignore
         session.user = token;
         return session;
     }
