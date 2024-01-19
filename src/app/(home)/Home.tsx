@@ -9,8 +9,19 @@ import { PRODUCTS_PER_PAGE } from "../../constants";
 import Pagination from "../../components/Pagination";
 import FloatingButton from "../../components/FloatingButton";
 import { HomeProps } from "./page";
+import { cookies } from "next/headers";
+
+async function getCookieData() {
+  const cookieData = cookies().getAll();
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(cookieData);
+    }, 1000)
+  );
+}
 
 export const Home = async ({ searchParams }: HomeProps) => {
+  const cookieData = await getCookieData();
   const products = await getProducts(searchParams);
   const currentUser = await getCurrentUser();
   console.log("products", products);
