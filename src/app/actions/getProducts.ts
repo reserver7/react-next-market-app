@@ -47,9 +47,15 @@ export default async function getProducts(
       orderBy: {
         createdAt: 'desc'
       },
-      skip: skip ? Number(skip) : 0,
-      take: PRODUCTS_PER_PAGE
+      ...({ take: PRODUCTS_PER_PAGE }),
+      ...(skip && { skip: Number(skip) }),
     });
+
+    // const safeProducts = products.map((product) => ({
+    //   ...product,
+    //   createdAt: product.createdAt.toISOString(),
+    //   updatedAt: product.updateAt.toISOString()
+    // }));
 
     return {
       data: products,

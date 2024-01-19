@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "../components/Navbar";
 import getCurrentUser from "./actions/getCurrentUser";
 import Script from "next/script";
 import ToastProvider from "../components/ToastProvider";
+import SwrProvider from "../providers/SwrProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +20,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const cookieData = await getCookieData();
   const currentUser = await getCurrentUser();
 
   return (
@@ -25,11 +28,22 @@ export default async function RootLayout({
       <body className={inter.className}>
         <Navbar currentUser={currentUser} />
         <ToastProvider />
-        {children}
+
+        <div>
+          <SwrProvider>{children}</SwrProvider>
+        </div>
+
         <Script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=a511983808697362b68b0674898209fb&libraries=services,clusterer&autoload=false" />
       </body>
     </html>
   );
 }
 
-export const dynamic = "auto";
+async function getCookieData() {
+  const cookieData = cookies().getAll();
+  return new Promise((resolve) =>
+    setTimeout(() => {
+      resolve(cookieData);
+    }, 1000)
+  );
+}

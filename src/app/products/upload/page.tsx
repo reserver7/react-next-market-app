@@ -48,7 +48,8 @@ const ProductUploadPage = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
 
-    axios.post("/api/products", data)
+    axios
+      .post("/api/products", data)
       .then((response) => {
         router.push(`/products/${response.data.id}`);
         reset();

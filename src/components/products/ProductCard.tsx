@@ -40,7 +40,11 @@ const ProductCard = ({ data, currentUser }: ProductCardProps) => {
           <div>
             {data.price.toLocaleString()} <span className="font-light">원</span>
           </div>
-          <div>{fromNow(data.createdAt)}</div>
+          <div>
+            {typeof data.createdAt === "string"
+              ? fromNow(new Date(data.createdAt))
+              : fromNow(data.createdAt)}
+          </div>
         </div>
       </div>
     </div>

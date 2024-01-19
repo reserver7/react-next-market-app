@@ -12,6 +12,3 @@ export function fromNow(time: string | Date) {
 export function formatTime(time: string | Date, format = 'YYYY.MM.DD h:mm A') {
     return dayjs(time).format(format)
 }
-
-
-

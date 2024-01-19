@@ -9,7 +9,7 @@ import { formatTime } from "../../helpers/dayjs";
 interface ProductInfoProps {
   user: User;
   description: string;
-  createdAt: Date | string;
+  createdAt: Date;
   category:
     | {
         icon: IconType;
@@ -33,7 +33,11 @@ const ProductInfo: React.FC<ProductInfoProps> = ({
           <div>{user?.name}</div>
         </div>
         <div className="flex flex-row items-center gap-4 font-light text-neutral-500">
-          <div>{formatTime(createdAt)}</div>
+          <div>
+            {typeof createdAt === "string"
+              ? formatTime(new Date(createdAt))
+              : formatTime(createdAt)}
+          </div>
         </div>
       </div>
       <hr />
